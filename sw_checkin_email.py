@@ -618,7 +618,7 @@ def getFlightInfo(res, flights):
              leg.arrive.airport, leg.arrive.dt_formatted,
              leg.arrive.dt_utc_formatted)
 
-  message += '\nYour automatic check in: http://southwest-checkin.herokuapp.com/flights/%s\n' % res.code
+  message += '\nYour automatic check in: http://acheck.herokuapp.com/flights/%s\n' % res.code
   return message
 
 def displayFlightInfo(res, flights, do_send_email=False):
