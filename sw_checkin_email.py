@@ -734,8 +734,10 @@ def scheduleFlight(res, flight, blocking=False, scheduler=None):
   if config["CELERY"]:
     from tasks import check_in_flight
     result = check_in_flight.apply_async([res.id, flight.id], countdown=flight.seconds)
+    dlog(result)
     flight.task_uuid = result.id
-    db.Session.commit()
+    dlog(flight.task_uuid)
+    dlog(db.Session.commit())
   elif not blocking:
     result = "Scheduling check in for flight at", flight.legs[0].depart.dt_formatted, "(local), ", flight.legs[0].depart.dt_utc_formatted, "(UTC) in", int(flight.seconds/60/60), "hrs", int(flight.seconds/60%60),  "mins from now..."
     t = Timer(flight.seconds, TryCheckinFlight, (res.id, flight.id, None, 1))
