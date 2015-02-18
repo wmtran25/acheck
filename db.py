@@ -5,11 +5,6 @@ from models import Base, Reservation
 class Database:
   """ An interface to a SQLAlchemy database """
 
-# Log debug messages to console
-  def dlog(str):
-    if config["VERBOSE"]:
-      print 'DEBUG: %s' % str
-
   def __init__(self, sqlite=':memory:', heroku=False, postgres=False):
     """ Initialize the database """
     if heroku:
@@ -29,7 +24,7 @@ class Database:
     # The scoped_session is thread safe
     self.Session = scoped_session(self.session_factory)
 
-    dlog('DB_Url: %s' % self.url)
+    print 'DB_Url: ', self.url
 
   def create_all(self):
     """ Create tables if they don't exist """
