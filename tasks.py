@@ -9,7 +9,7 @@ from models import Reservation, Flight, FlightLeg, FlightLegLocation
 from db import Database
 from sw_checkin_email import *
 
-celery = Celery('tasks')
+celery = Celery('tasks',broker='redis://redistogo:735def1587e40ee9f88d1d1c270e0a33@dab.redistogo.com:9907/',backend='redis://redistogo:735def1587e40ee9f88d1d1c270e0a33@dab.redistogo.com:9907/')
 celery.config_from_object('celery_config')
 
 from celery.utils.log import get_task_logger
