@@ -9,11 +9,6 @@ from models import Reservation, Flight, FlightLeg, FlightLegLocation
 from db import Database
 from sw_checkin_email import *
 
-# Log debug messages to console
-def dlog(str):
-  if config["VERBOSE"]:
-    print 'DEBUG: %s' % str
-
 celery = Celery('tasks')
 celery.config_from_object('celery_config')
 
@@ -29,8 +24,6 @@ if config["STORE_DATABASE"]:
     db = Database(sqlite=config["SQLITE_DB"])
 else:
   db = Database()
-
-dlog('DB: %s' % db)
 
 @celery.task(default_retry_delay=config["RETRY_INTERVAL"], max_retries=config["MAX_RETRIES"])
 def check_in_flight(reservation_id, flight_id):
