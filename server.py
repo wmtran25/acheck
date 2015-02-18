@@ -205,7 +205,9 @@ def schedule_all_reservations():
 @app.route('/all/update_activity', methods=['GET'])
 @requires_authentication
 def update_activity():
+  print 'In update activity page'
   update_all_reservation_activity.apply_async()
+  print 'Updated all reservations activity'
   return redirect(url_for("all_reservations"))
 
 @app.route('/all/delete_old_reservations', methods=['GET'])
