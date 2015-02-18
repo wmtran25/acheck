@@ -6,9 +6,9 @@ class Database:
   """ An interface to a SQLAlchemy database """
 
 # Log debug messages to console
-def dlog(str):
-  if config["VERBOSE"]:
-    print 'DEBUG: %s' % str
+  def dlog(str):
+    if config["VERBOSE"]:
+      print 'DEBUG: %s' % str
 
   def __init__(self, sqlite=':memory:', heroku=False, postgres=False):
     """ Initialize the database """
@@ -29,7 +29,7 @@ def dlog(str):
     # The scoped_session is thread safe
     self.Session = scoped_session(self.session_factory)
 
-dlog('DB_Url: %s' % self.url)
+    dlog('DB_Url: %s' % self.url)
 
   def create_all(self):
     """ Create tables if they don't exist """
