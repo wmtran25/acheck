@@ -375,7 +375,7 @@ class HtmlFormParser(object):
         cb.checked = True
         break
 
-class ReservationInfoParser(object, res):
+class ReservationInfoParser(object):
   """ This class finds the relevant information for departure and
       returning flights in a reservation.
 
@@ -408,10 +408,10 @@ class ReservationInfoParser(object, res):
     soup = flights_with_relevant_confirmation_code[0]
 
     # The table containing departure flights
-    airItineraryDepartTable = soup.find_all('table', {"id" : lambda x: x and x.startswith('airItinerarydepart_'+res.code)})
+    airItineraryDepartTable = soup.find_all('table', {"id" : lambda x: x and x.startswith('airItinerarydepart_')})
     dlog(airItineraryDepartTable)
     # The table containing return flights
-    airItineraryReturnTable = soup.find_all('table', {"id" : lambda x: x and x.startswith('airItineraryreturn_'+res.code)})
+    airItineraryReturnTable = soup.find_all('table', {"id" : lambda x: x and x.startswith('airItineraryreturn_')})
     dlog(airItineraryReturnTable)
 
     dlog("Checking reservation departure flights...")
