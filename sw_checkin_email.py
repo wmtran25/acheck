@@ -408,10 +408,10 @@ class ReservationInfoParser(object):
     soup = flights_with_relevant_confirmation_code[0]
 
     # The table containing departure flights
-    airItineraryDepartTable = soup.find_all('table', id=lambda x: x and x.startswith('airItinerarydepart_'))
+    airItineraryDepartTable = soup.find_all('table', {"id" : lambda x: x and x.startswith('airItinerarydepart_')})
     dlog(airItineraryDepartTable)
     # The table containing return flights
-    airItineraryReturnTable = soup.find_all('table', id=lambda x: x and x.startswith('airItineraryreturn_'))
+    airItineraryReturnTable = soup.find_all('table', {"id" : lambda x: x and x.startswith('airItineraryreturn_')})
     dlog(airItineraryReturnTable)
 
     dlog("Checking reservation departure flights...")
