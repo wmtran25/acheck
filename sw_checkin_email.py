@@ -506,7 +506,7 @@ def getFlightTimes(res):
   if res.new:
     (swdata, form_url) = ReadUrl(retrieve_url)
 
-    form = HtmlFormParser(swdata, form_url, 'pnrFriendlyLookup_check_form')
+    form = HtmlFormParser(swdata, form_url, 'pnrFriendlyLookup_check_form_leftPanel')
 
     # load the parameters into the text boxes
     form.setTextField('confirmationNumberFirstName', res.first_name)
