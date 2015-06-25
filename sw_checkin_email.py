@@ -415,8 +415,7 @@ class ReservationInfoParser(object):
     dlog(airItineraryReturnTable)
 
     dlog("Checking reservation departure flights...")
-    '''if airItineraryDepartTable:'''
-    if true:
+    if airItineraryDepartTable:
       self.exists = True
       self._addFlights(airItineraryDepartTable)
     else:
