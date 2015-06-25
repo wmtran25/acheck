@@ -409,7 +409,7 @@ class ReservationInfoParser(object):
 
     # The table containing departure flights
     airItineraryDepartTable = soup.find_all('table', {"id" : lambda x: x and x.startswith('airItinerarydepart_')})
-    dlog(airItineraryDepartTable)
+    '''dlog(airItineraryDepartTable)'''
     # The table containing return flights
     airItineraryReturnTable = soup.find_all('table', {"id" : lambda x: x and x.startswith('airItineraryreturn_')})
     '''dlog(airItineraryReturnTable)'''
@@ -442,7 +442,7 @@ class ReservationInfoParser(object):
     flight = Flight()
 
     # Get flight reservation date from first flight leg
-    flight_date_str = FindByTagClass(soup, 'span', 'travelDateTime').string.strip()
+    flight_date_str = FindByTagClass(soup, 'span', 'itinerary-table--summary-travel-date').string.strip()
     day = date(*time_module.strptime(flight_date_str, '%A, %B %d, %Y')[0:3])
     dlog("Reservation Date: " + str(day))
 
@@ -453,12 +453,12 @@ class ReservationInfoParser(object):
       flight.legs.append(flight_leg)
 
       # Get flight number
-      parent = FindByTagClass(tr, 'td', 'flightNumber')
+      parent = FindByTagClass(tr, 'span', 'itinerary-table--segment-flight-number')
       flight_leg.flight_number = strip_tags(unicode(parent.strong))
       print "Found flight", flight_leg.flight_number
 
       # List of arrival and departure details for each airport
-      flight_leg_soup = tr.find('table', 'airItineraryFlightRouting').find_all('tr')
+      flight_leg_soup = tr.find('table', 'airProductItineraryTable airItineraryTable').find_all('tr')
       dlog("Parsing Departure:")
       flight_leg.depart = self._parseFlightLegDetails(day, flight_leg_soup[0])
       dlog("Parsing Arrival:")
@@ -479,7 +479,7 @@ class ReservationInfoParser(object):
     '''
     f = FlightLegLocation()
     # Get airport code
-    departure_airport = FindByTagClass(legDetails, 'td', 'routingDetailsStops')
+    departure_airport = FindByTagClass(legDetails, 'td', 'itinerary-table--cell')
     f.airport = re.findall('[A-Z]{3}', str(departure_airport))[0]
     dlog("Airport Code: " + f.airport)
     # Cannot get the find method with regex working
@@ -489,7 +489,7 @@ class ReservationInfoParser(object):
     f.tz = airport_timezone_map[f.airport]
 
     # Get time
-    segmentTime = FindByTagClass(legDetails, 'td', 'routingDetailsTimes', get_text=True)
+    segmentTime = FindByTagClass(legDetails, 'class', 'itinerary-table--segment-flight-time', get_text=True)
     # Create time() object
     flight_time = time(*time_module.strptime(segmentTime.strip().rstrip("Next Day").strip(), '%I:%M %p')[3:5])
     dlog("Time: " + str(flight_time))
