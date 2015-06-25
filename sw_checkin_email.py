@@ -517,7 +517,7 @@ def getFlightTimes(res):
 
     # submit the request to pull up the reservations on this confirmation number
     (reservations, _) = form.submit()
-
+    dlog(reservations)
     info = ReservationInfoParser(reservations)
     if info.exists:
       res.flights = info.flights
