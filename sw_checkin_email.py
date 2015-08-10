@@ -409,7 +409,7 @@ class ReservationInfoParser(object):
 
     # The table containing departure flights
     airItineraryDepartTable = soup.find_all('tr', {"id" : lambda x: x and x.startswith('airItinerarydepart_')})
-    '''dlog(airItineraryDepartTable)'''
+    dlog(airItineraryDepartTable)
     # The table containing return flights
     airItineraryReturnTable = soup.find_all('tr', {"id" : lambda x: x and x.startswith('airItineraryreturn_')})
     '''dlog(airItineraryReturnTable)'''
