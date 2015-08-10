@@ -451,11 +451,14 @@ class ReservationInfoParser(object):
     for tr in soup.find_all("li", recursive=False):
       flight_leg = FlightLeg()
       flight.legs.append(flight_leg)
+      dlog("Flight Legs: " + str(flight_leg))
 
       # Get flight number
       parent = FindByTagClass(tr, 'span', 'itinerary-table--segment-flight-number')
       flight_leg.flight_number = strip_tags(unicode(parent.strong))
       print "Found flight", flight_leg.flight_number
+      dlog("Flight Number: " + str(flight_leg.flight_number))
+
 
       # List of arrival and departure details for each airport
       flight_leg_soup = tr.find('table', 'airProductItineraryTable airItineraryTable').find_all('tr')
