@@ -59,7 +59,7 @@ from tasks import *
 
 # ========================================================================
 
-base_url = 'http://www.southwest.com'
+base_url = 'https://www.southwest.com'
 checkin_url = urlparse.urljoin(base_url, '/flight/retrieveCheckinDoc.html')
 retrieve_url = urlparse.urljoin(base_url, '/flight/lookup-air-reservation.html')
 
