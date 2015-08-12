@@ -409,6 +409,7 @@ class ReservationInfoParser(object):
 
     # The table containing departure flights
     airItineraryDepartTable = soup.find_all('tr', {"id" : lambda x: x and x.startswith('airItinerarydepart_')})
+    dlog("LINE 412 +++++++++++++++++++")
     dlog(airItineraryDepartTable)
     # The table containing return flights
     airItineraryReturnTable = soup.find_all('tr', {"id" : lambda x: x and x.startswith('airItineraryreturn_')})
@@ -449,7 +450,9 @@ class ReservationInfoParser(object):
     # Each flight leg is represented in a row in the HTML table.
     # Each row includes arrival and departure times and flight number.
     dlog("line 451")
+    dlog(tr)
     for tr in soup.find_all("tr", recursive=False):
+      dlog(soup.find_all("tr", recursive=False))
       flight_leg = FlightLeg()
       dlog(flight_leg)
       flight.legs.append(flight_leg)
