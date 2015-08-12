@@ -454,7 +454,7 @@ class ReservationInfoParser(object):
     # Each row includes arrival and departure times and flight number.
     dlog("line 451")
     for tr in soup.find_all("td", recursive=False):
-      dlog(soup.find_all("tr", recursive=False))
+      dlog(tr)
       flight_leg = FlightLeg()
       dlog(flight_leg)
       flight.legs.append(flight_leg)
@@ -466,7 +466,7 @@ class ReservationInfoParser(object):
       print "Found flight", flight_leg.flight_number
       dlog("Flight Number: " + str(flight_leg.flight_number))
 
-
+      dlog("line 469")
       # List of arrival and departure details for each airport
       flight_leg_soup = tr.find('table', 'airProductItineraryTable airItineraryTable').find_all('tr')
       dlog("Parsing Departure:")
