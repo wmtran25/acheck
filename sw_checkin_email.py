@@ -431,6 +431,8 @@ class ReservationInfoParser(object):
 
   def _addFlights(self, table):
     for item in table:
+      dlog("line 434 ==================")
+      dlog(item)
       flight = self._parseFlightInfo(item)
       # If we already have the flight number, don't add it again
       if not any(flight.legs[0].flight_number in f.legs[0].flight_number for f in self.flights):
@@ -440,8 +442,9 @@ class ReservationInfoParser(object):
     """ For each reservation, get the date, and each flight leg with airport code,
         departure and arrival times
     """
+    dlog("line 445")
     flight = Flight()
-
+    dlog(flight)
     # Get flight reservation date from first flight leg
     flight_date_str = FindByTagClass(soup, 'span', 'itinerary-table--summary-travel-date').string.strip()
     day = date(*time_module.strptime(flight_date_str, '%A, %B %d, %Y')[0:3])
@@ -450,7 +453,6 @@ class ReservationInfoParser(object):
     # Each flight leg is represented in a row in the HTML table.
     # Each row includes arrival and departure times and flight number.
     dlog("line 451")
-    dlog(tr)
     for tr in soup.find_all("td", recursive=False):
       dlog(soup.find_all("tr", recursive=False))
       flight_leg = FlightLeg()
