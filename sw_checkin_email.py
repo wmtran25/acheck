@@ -468,7 +468,7 @@ class ReservationInfoParser(object):
 
       dlog("line 469")
       # List of arrival and departure details for each airport
-      flight_leg_soup = tr.find('table', 'airProductItineraryTable airItineraryTable').find_all('td')
+      flight_leg_soup = tr.find('table', 'airProductItineraryTable airItineraryTable').find_all('tr')
       dlog("Parsing Departure:")
       flight_leg.depart = self._parseFlightLegDetails(day, flight_leg_soup[0])
       dlog("Parsing Arrival:")
@@ -489,7 +489,9 @@ class ReservationInfoParser(object):
     '''
     f = FlightLegLocation()
     # Get airport code
+    dlog("getting airport code")
     departure_airport = FindByTagClass(legDetails, 'td', 'itinerary-table--cell')
+    dlog("line 494")
     f.airport = re.findall('[A-Z]{3}', str(departure_airport))[0]
     dlog("Airport Code: " + f.airport)
     # Cannot get the find method with regex working
