@@ -499,6 +499,7 @@ class ReservationInfoParser(object):
     f.tz = airport_timezone_map[f.airport]
 
     # Get time
+    dlog("get time - line 502")
     segmentTime = FindByTagClass(legDetails, 'class', 'itinerary-table--segment-flight-time', get_text=True)
     # Create time() object
     flight_time = time(*time_module.strptime(segmentTime.strip().rstrip("Next Day").strip(), '%I:%M %p')[3:5])
