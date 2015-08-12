@@ -453,7 +453,7 @@ class ReservationInfoParser(object):
     # Each flight leg is represented in a row in the HTML table.
     # Each row includes arrival and departure times and flight number.
     dlog("line 451")
-    for tr in re.findall("td", recursive=False):
+    for tr in soup.find_all("td", recursive=False):
       dlog(tr)
       flight_leg = FlightLeg()
       dlog(flight_leg)
