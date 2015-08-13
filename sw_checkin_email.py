@@ -468,7 +468,10 @@ class ReservationInfoParser(object):
 
       dlog("line 469")
       # List of arrival and departure details for each airport
-      flight_leg_soup = tr.find('table', 'airProductItineraryTable airItineraryTable').find_all('tr')
+      flight_leg_soup1 = tr.find('table', 'airProductItineraryTable airItineraryTable')
+      dlog("got flight_leg_soup1")
+      flight_leg_soup = flight_leg_soup1.find_all('tr')
+      dlog("got flight_leg_soup")
       dlog("Parsing Departure:")
       flight_leg.depart = self._parseFlightLegDetails(day, flight_leg_soup[0])
       dlog("Parsing Arrival:")
